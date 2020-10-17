@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Model;
-using Persistence.Interface;
 
 namespace Persistence.DatabaseContext
 {

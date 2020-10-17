@@ -8,8 +8,6 @@ namespace Persistence.Dependency
     {
         public static void GetDependency(this IServiceCollection service)
         {
-            // SpecificContext is ef Database context, name can be changed according to database
-            service.AddScoped<ISpecificContext, SpecificContext>();
         }
     }
 }

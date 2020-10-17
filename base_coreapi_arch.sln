@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "service", "service\Service.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Businesslayer", "Businesslayer\Businesslayer.csproj", "{550A8162-FBA2-42B5-B52C-7CF6B48B9626}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ibusinesslayer", "Ibusinesslayer\IBusinesslayer.csproj", "{4B62D0E4-CDED-4694-AEFB-0548EF8C76AD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ipersistance", "Ipersistence\IPersistance.csproj", "{632AD1A8-3B58-4A38-A216-C8EA106303A5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "model", "model\Model.csproj", "{E787E4B2-B72A-42B7-9BD5-8DD4A19A8875}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "persistence", "persistence\Persistence.csproj", "{335C19C0-6404-42E6-88F9-4E8C04DB6D9D}"

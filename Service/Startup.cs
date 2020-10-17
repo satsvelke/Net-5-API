@@ -37,7 +37,7 @@ namespace Service
                        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // add your database connecttion 
-            services.AddDbContext<SpecificContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
+            services.AddDbContext<SpecificContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SpecificContext"), c => c.MigrationsAssembly("Service")));
 
             // get all dependency from persistance layer
             services.GetDependency();

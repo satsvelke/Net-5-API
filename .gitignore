@@ -11,4 +11,5 @@ Service/obj/
 
 Persistence/bin
 Service/bin
-
+Model/bin
+BusinessLayer/bin
