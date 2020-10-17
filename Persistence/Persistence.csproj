@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
-    <ProjectReference Include="../IPersistence/IPersistance.csproj" />
+      <ProjectReference Include="../Model/Model.csproj" />
 
   </ItemGroup>
 

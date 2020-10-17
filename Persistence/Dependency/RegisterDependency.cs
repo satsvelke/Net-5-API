@@ -1,6 +1,6 @@
-using IPersistence;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.DatabaseContext;
+using Persistence.Interface;
 
 namespace Persistence.Dependency
 {
