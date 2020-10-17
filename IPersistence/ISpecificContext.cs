@@ -1,6 +1,10 @@
+using System;
+
 namespace IPersistence
 {
-    public interface ISpecificContext
+
+    // ef database context interface 
+    public interface ISpecificContext : IDisposable
     {
 
     }
