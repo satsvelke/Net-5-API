@@ -1,0 +1,11 @@
+.vs/base_coreapi_arch/DesignTimeBuild/.dtbcache.v2
+.vs/base_coreapi_arch/v16/.suo
+BusinessLayer/obj/
+IBusinessLayer/obj/
+IPersistence/obj/
+Model/obj/
+Persistence/obj/
+Service/obj/
+
+
+
