@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Persistence.DatabaseContext;
+using Persistence.Dependency;
 
 namespace Service
 {
@@ -36,7 +37,11 @@ namespace Service
                        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // add your database connecttion 
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
+            services.AddDbContext<SpecificContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
+
+            // get all dependency from persistance layer
+            services.GetDependency();
+
             services.AddControllers();
         }
 
