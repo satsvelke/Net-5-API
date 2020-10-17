@@ -4,4 +4,4 @@
 
 A basic architect to start a project from scratch 
 
-made  .net core with Ef 
+made in .net core with Ef 
