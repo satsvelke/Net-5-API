@@ -1,6 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Model;
 using Persistence.DatabaseContext;
 using Persistence.Interface;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Persistence.Repository
@@ -28,6 +30,15 @@ namespace Persistence.Repository
         public Task<User> GetAsync(User entity)
         {
             throw new System.NotImplementedException();
+        }
+
+        public async Task<User> GetUserByEmail(User user)
+        {
+            using (context)
+            {
+                IQueryable<User> q = context.Users.Where(u => u.Email == user.Email && u.IsActive == true);
+                return await q.FirstOrDefaultAsync();
+            }
         }
 
         public Task<User> RemoveAsync(User entity)
