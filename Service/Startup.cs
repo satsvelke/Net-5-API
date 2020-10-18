@@ -36,8 +36,8 @@ namespace Service
                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            // add your database connecttion 
-            services.AddDbContext<SpecificContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SpecificContext"), c => c.MigrationsAssembly("Service")));
+            // // add your database connecttion 
+            // services.AddDbContext<SpecificContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SpecificContext"), c => c.MigrationsAssembly("Service")));
 
             // get all dependency from persistance layer
             services.GetDependency();

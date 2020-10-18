@@ -1,3 +1,4 @@
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Model;
 
@@ -9,6 +10,7 @@ namespace Persistence.DatabaseContext
         public SpecificContext(DbContextOptions<SpecificContext> options) : base(options)
         {
         }
+
         public DbSet<User> Users { get; set; }
     }
 }
