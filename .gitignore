@@ -13,3 +13,5 @@ Persistence/bin
 Service/bin
 Model/bin
 BusinessLayer/bin
+ViewModel/bin
+ViewModel/obj

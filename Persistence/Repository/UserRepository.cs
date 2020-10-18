@@ -5,14 +5,19 @@ using System.Threading.Tasks;
 
 namespace Persistence.Repository
 {
-    public class UserRepository : IUser<User>
+    public class UserRepository : IUserRepository
     {
         private readonly SpecificContext context;
         public UserRepository(SpecificContext _context) => context = _context;
 
-        public Task<User> AddAsync(User entity)
+        public async Task<User> AddAsync(User entity)
         {
-            throw new System.NotImplementedException();
+            using (context)
+            {
+                context.Add(entity);
+                await context.SaveChangesAsync();
+                return entity;
+            }
         }
 
         public Task<User> GetAllAsync(User entity)

@@ -10,7 +10,7 @@ using Persistence.DatabaseContext;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(SpecificContext))]
-    [Migration("20201018052317_UserTable")]
+    [Migration("20201018082434_UserTable")]
     partial class UserTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,12 +31,14 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");

@@ -1,12 +1,12 @@
+using AutoMapper;
+using BusinessLayer.Depenedency;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
-using Persistence.DatabaseContext;
 using Persistence.Dependency;
 
 namespace Service
@@ -28,6 +28,9 @@ namespace Service
                           .AllowAnyHeader();
                }));
 
+            services.AddControllers();
+
+
             // this allows the response to default json format
             services.AddControllers().AddNewtonsoftJson(options =>
                        {
@@ -36,13 +39,13 @@ namespace Service
                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            // // add your database connecttion 
-            // services.AddDbContext<SpecificContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SpecificContext"), c => c.MigrationsAssembly("Service")));
 
             // get all dependency from persistance layer
-            services.GetDependency();
+            services.GetPersistenceDependency();
 
-            services.AddControllers();
+            // get dependency from BusinessLayer
+            services.GetBusinessDependency();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
