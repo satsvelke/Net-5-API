@@ -15,6 +15,8 @@ namespace Service.Controllers
         {
             _userLogic = IUserLogic;
         }
+
+        [HttpGet]
         public async Task<IActionResult> GetToken(UserViewModel user)
         {
             return Ok(await _userLogic.CreateTokenAsync(user));

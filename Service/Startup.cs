@@ -1,5 +1,8 @@
 using System;
+using System.Configuration;
+using System.Linq;
 using System.Text;
+using BusinessLayer.AppSettings;
 using BusinessLayer.Depenedency;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Persistence.Dependency;
 
@@ -33,7 +37,6 @@ namespace Service
 
             services.AddControllers();
 
-
             // this allows the response to default json format
             services.AddControllers().AddNewtonsoftJson(options =>
                        {
@@ -53,13 +56,14 @@ namespace Service
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = Configuration["Jwt: Issuer"],
-                    ValidAudience = Configuration["Jwt: Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt: SecretKey"])),
-                    ClockSkew = TimeSpan.Zero
+                    ValidIssuer = Configuration["JwtSettings:Issuer"],
+                    ValidAudience = Configuration["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSettings:SecretKey"])),
                 };
             });
 
+            //  with ale to read the jwt configurtation from  appsettings.json 
+            services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
             // get all dependency from persistance layer
             services.GetPersistenceDependency();
@@ -67,11 +71,30 @@ namespace Service
             // get dependency from BusinessLayer
             services.GetBusinessDependency();
 
+            // swagger configuration 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "My API V1");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
