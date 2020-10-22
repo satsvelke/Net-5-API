@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace Persistence.Repository
 {
-    public class UserRepository : IUserRepository
+    public partial class UserRepository : IUserRepository
     {
         private readonly IWork work;
         public UserRepository(IWork _work) => work = _work;

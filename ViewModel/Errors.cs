@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace ViewModel
 {
-    public class Errors
+    public partial class Errors
     {
         public List<string> ErrorList { get; set; }
     }
 
-    public class ErrorMessages
+    public partial class ErrorMessages
     {
         public Errors errors { get; set; }
         public string type { get; set; }

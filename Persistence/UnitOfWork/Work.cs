@@ -6,7 +6,7 @@ using Persistence.Repository;
 
 namespace Persistence.UnitOfWork
 {
-    public class Work : IDisposable, IWork
+    public partial class Work : IDisposable, IWork
     {
         private readonly SpecificContext context;
 

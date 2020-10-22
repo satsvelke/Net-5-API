@@ -7,7 +7,7 @@ using ViewModel;
 
 namespace Service.Controllers.Filters
 {
-    public class ExceptionFilter : IAsyncExceptionFilter
+    public partial class ExceptionFilter : IAsyncExceptionFilter
     {
         public Task OnExceptionAsync(ExceptionContext context)
         {

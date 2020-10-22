@@ -8,7 +8,7 @@ namespace Service.Controllers
 
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class LoginController : ControllerBase
+    public partial class LoginController : ControllerBase
     {
         private readonly IUserLogic _userLogic;
         public LoginController(IUserLogic IUserLogic)

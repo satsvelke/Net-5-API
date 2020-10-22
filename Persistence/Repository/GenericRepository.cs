@@ -8,7 +8,7 @@ using Persistence.DatabaseContext;
 
 namespace Persistence.Repository
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public partial class GenericRepository<TEntity> where TEntity : class
     {
         private readonly SpecificContext context;
         internal DbSet<TEntity> dbSet;
