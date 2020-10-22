@@ -16,7 +16,6 @@ namespace Persistence.Repository
             await work.Save();
             return entity;
         }
-
         public async Task<User> GetUserByEmail(User user)
         {
             var filteredList = await work.UserRepository.GetAsync(filter: u => u.Email == user.Email && u.IsActive == true);
