@@ -10,5 +10,6 @@ namespace Persistence.DatabaseContext
         {
         }
         public virtual DbSet<User> Users { get; set; }
+        // public virtual DbSet<Exception> Exceptions { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Persistence.DatabaseContext;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(SpecificContext))]
-    [Migration("20201018082434_UserTable")]
-    partial class UserTable
+    [Migration("20201023193403_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
