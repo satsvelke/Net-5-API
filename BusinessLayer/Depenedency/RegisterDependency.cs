@@ -16,6 +16,7 @@ namespace BusinessLayer.Depenedency
             IMapper mapper = mapperConfig.CreateMapper();
             service.AddSingleton(mapper);
 
+            // business layer dependency
             service.AddScoped<IUserLogic, UserLogic>();
 
         }

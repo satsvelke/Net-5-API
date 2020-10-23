@@ -18,7 +18,7 @@ namespace Service.Controllers.Filters
             {
                 ErrorList = errorList
             };
-            var errorsMessage = new ErrorMessages()
+            var errorsMessage = new ErrorMessage()
             {
                 type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
                 title = "Internal Server Error",
@@ -31,6 +31,7 @@ namespace Service.Controllers.Filters
             {
                 StatusCode = 500
             };
+
             return Task.CompletedTask;
         }
     }

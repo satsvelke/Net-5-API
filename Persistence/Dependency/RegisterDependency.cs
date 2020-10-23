@@ -17,6 +17,7 @@ namespace Persistence.Dependency
             // register Unitof work repository by 
             service.AddScoped<IWork, Work>();
 
+            //persistance layer dependency
             service.AddScoped<IUserRepository, UserRepository>();
         }
     }

@@ -1,5 +1,3 @@
-using System;
-using System.Configuration;
 using System.Linq;
 using System.Text;
 using BusinessLayer.AppSettings;
@@ -15,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using Persistence.Dependency;
+using ViewModel;
 
 namespace Service
 {
@@ -62,8 +61,11 @@ namespace Service
                 };
             });
 
-            //  with ale to read the jwt configurtation from  appsettings.json 
+            // read the jwt configurtation from  appsettings.json 
             services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
+
+            // read default ErrorMessages
+            services.Configure<DefaultMessage>(Configuration.GetSection("DefaultMessage"));
 
             // get all dependency from persistance layer
             services.GetPersistenceDependency();
@@ -96,9 +98,7 @@ namespace Service
             });
 
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
             // uncommet to use https 
             //app.UseHttpsRedirection();

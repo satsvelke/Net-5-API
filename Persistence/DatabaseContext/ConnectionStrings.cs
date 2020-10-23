@@ -8,9 +8,6 @@ namespace Persistence.DatabaseContext
         private IConfiguration Configuration => new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
            .AddJsonFile("appsettings.json")
            .Build();
-        public string GetSpecificContextConnection()
-        {
-            return Configuration.GetConnectionString("SpecificContext");
-        }
+        public string GetSpecificContextConnection() => Configuration.GetConnectionString("SpecificContext");
     }
 }

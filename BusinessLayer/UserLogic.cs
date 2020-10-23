@@ -17,54 +17,48 @@ namespace BusinessLayer
 {
     public partial class UserLogic : IUserLogic
     {
-        private readonly IOptions<JwtSettings> _jwtSettings;
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
-        public UserLogic(IUserRepository IUserRepository, IMapper mapper, IOptions<JwtSettings> jwtSettings)
+        private readonly IOptions<JwtSettings> jwtSettings;
+        private readonly IOptions<DefaultMessage> messages;
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
+        public UserLogic(IUserRepository iUserRepository, IMapper mapper, IOptions<JwtSettings> jwtSettings, IOptions<DefaultMessage> messages)
         {
-            _userRepository = IUserRepository;
-            _mapper = mapper;
-            _jwtSettings = jwtSettings;
+            this.userRepository = iUserRepository;
+            this.mapper = mapper;
+            this.jwtSettings = jwtSettings;
+            this.messages = messages;
         }
 
-        public async Task<UserViewModel> CreateTokenAsync(UserViewModel user)
+        public async Task<Tuple<UserViewModel, ErrorMessage>> CreateTokenAsync(UserViewModel user)
         {
-            var u = await _userRepository.GetUserByEmail(_mapper.Map<User>(user));
-            if (u == null)
-                return null;
+            var existingUser = await this.userRepository.GetUserByEmail(this.mapper.Map<User>(user));
 
-            if (u.Email == user.Email && u.Password == user.Password)
+            if (existingUser == null)
+                return Tuple.Create<UserViewModel, ErrorMessage>(null, this.messages.Value.LoginError); ;
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtSettings.Value.SecretKey));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
+
+            var claims = new List<Claim>();
+            claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+            claims.Add(new Claim("Valid", "1"));
+            claims.Add(new Claim("UserId", existingUser.UserId.ToString()));
+
+            //Create Security Token object by giving required parameters    
+            var token = new JwtSecurityToken(this.jwtSettings.Value.Issuer, //Issure    
+                            this.jwtSettings.Value.Audience,  //Audience    
+                            claims,
+                            expires: DateTime.Now.AddDays(1),
+                            signingCredentials: credentials);
+
+            var createdToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return Tuple.Create<UserViewModel, ErrorMessage>(new UserViewModel()
             {
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Value.SecretKey));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
-
-                var claims = new List<Claim>();
-                claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-                claims.Add(new Claim("Valid", "1"));
-                claims.Add(new Claim("UserId", u.UserId.ToString()));
-
-                //Create Security Token object by giving required parameters    
-                var token = new JwtSecurityToken(_jwtSettings.Value.Issuer, //Issure    
-                                _jwtSettings.Value.Audience,  //Audience    
-                                claims,
-                                expires: DateTime.Now.AddDays(1),
-                                signingCredentials: credentials);
-
-                var createdToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-                return new UserViewModel()
-                {
-                    Token = createdToken
-                };
-            }
-
-            return null;
+                Token = createdToken
+            }, null);
         }
 
-        public async Task<UserViewModel> CreateUserAsync(UserViewModel user)
-        {
-            var addedUser = await _userRepository.AddAsync(_mapper.Map<User>(user));
-            return _mapper.Map<UserViewModel>(addedUser);
-        }
+        public async Task<UserViewModel> CreateUserAsync(UserViewModel user) => this.mapper.Map<UserViewModel>(await this.userRepository.AddAsync(this.mapper.Map<User>(user)));
     }
 }

@@ -25,30 +25,19 @@ namespace Persistence.Repository
             IQueryable<TEntity> query = dbSet;
 
             if (filter != null)
-            {
                 query = query.Where(filter);
-            }
 
             foreach (var includeProperty in includeProperties.Split
                 (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-            {
                 query = query.Include(includeProperty);
-            }
 
             if (orderBy != null)
-            {
                 return await orderBy(query).ToListAsync();
-            }
             else
-            {
                 return await query.ToListAsync();
-            }
         }
 
-        public async virtual Task<TEntity> GetByID(object id)
-        {
-            return await dbSet.FindAsync(id);
-        }
+        public async virtual Task<TEntity> GetByID(object id) => await dbSet.FindAsync(id);
 
         public virtual TEntity Insert(TEntity entity)
         {

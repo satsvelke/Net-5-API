@@ -12,10 +12,7 @@ namespace Persistence.UnitOfWork
 
         private GenericRepository<User> userRepository;
 
-        public Work(SpecificContext _context)
-        {
-            context = _context;
-        }
+        public Work(SpecificContext _context) => this.context = _context;
         public GenericRepository<User> UserRepository
         {
             get
@@ -29,10 +26,7 @@ namespace Persistence.UnitOfWork
         }
 
 
-        public async Task<int> Save()
-        {
-            return await context.SaveChangesAsync();
-        }
+        public async Task<int> Save() => await context.SaveChangesAsync();
 
         private bool disposed = false;
 
