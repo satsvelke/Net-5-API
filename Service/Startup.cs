@@ -86,7 +86,6 @@ namespace Service
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-
             app.UseDeveloperExceptionPage();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
