@@ -80,13 +80,18 @@ namespace Service
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
+
+            //    services.AddExceptional(Configuration.GetSection("Exceptional"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseDeveloperExceptionPage();
+            //  app.UseExceptional();
+
+            // app.UseDeveloperExceptionPage();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -98,8 +103,8 @@ namespace Service
                 c.SwaggerEndpoint("v1/swagger.json", "My API V1");
             });
 
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
+            // if (env.IsDevelopment())
+            //     app.UseDeveloperExceptionPage();
 
             // uncommet to use https 
             //app.UseHttpsRedirection();
