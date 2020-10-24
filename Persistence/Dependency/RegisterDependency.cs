@@ -14,10 +14,10 @@ namespace Persistence.Dependency
             // register DbContext
             service.AddDbContext<SpecificContext>(o => o.UseSqlServer(new ConnectionStrings().GetSpecificContextConnection()));
 
-            // register Unitof work repository by 
+            // register work to Iwork   
             service.AddScoped<IWork, Work>();
 
-            //persistance layer dependency
+            //persistance layer dependency (all repositories)
             service.AddScoped<IUserRepository, UserRepository>();
         }
     }

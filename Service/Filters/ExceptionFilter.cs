@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using ViewModel;
-
-namespace Service.Controllers.Filters
+/// <summary>
+/// deprecated, replaced by custom exception middleware 
+/// </summary>
+namespace Service.Filters
 {
     public partial class ExceptionFilter : IAsyncExceptionFilter
     {

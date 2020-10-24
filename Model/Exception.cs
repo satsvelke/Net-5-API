@@ -1,13 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
     public class Exception
     {
-        [Key]
-        public int Id { get; set; }
-        public string GUID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
         public string ApplicationName { get; set; }
         public string MachineName { get; set; }
         public DateTime CreationDate { get; set; } = DateTime.Now;
@@ -27,5 +27,8 @@ namespace Model
         public int DuplicateCount { get; set; }
         public DateTime LastLogDate { get; set; }
         public string Category { get; set; }
+        public string StackTrace { get; set; }
+        public string TraceId { get; set; }
+        public string Response { get; set; }
     }
 }

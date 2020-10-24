@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Service.Controllers.Filters;
+using Service.Filters;
 
 namespace Service.Controllers
 {
@@ -8,7 +8,7 @@ namespace Service.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
-    [TypeFilter(typeof(ExceptionFilter))]
+    //[TypeFilter(typeof(ExceptionFilter))] // deprecated
     public partial class CoreController : ControllerBase
     {
 

@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using Persistence.DatabaseContext;
 using Persistence.Dependency;
+using Service.Middleware;
 using ViewModel;
 
 namespace Service
@@ -83,17 +84,18 @@ namespace Service
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
+            // encrypt and decrypt
             services.AddDataProtection();
 
-            //    services.AddExceptional(Configuration.GetSection("Exceptional"));
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SpecificContext context)
         {
 
-            //  app.UseExceptional();
+            // custom excepetionHandler middleware 
+            app.UseExceptionHandler(err => err.UseExceptionHandler(env));
 
             // app.UseDeveloperExceptionPage();
 
