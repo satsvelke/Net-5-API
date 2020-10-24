@@ -18,9 +18,7 @@ namespace Persistence.Repository
         }
         public async Task<User> GetUserByEmail(User user)
         {
-            int i = 0;
-            var nn = 10 / i;
-            var filteredList = await work.UserRepository.GetAsync(filter: u => u.Email == user.Email && u.Password == user.Password && u.IsActive == true);
+            var filteredList = await work.UserRepository.GetAsync(filter: u => u.Email == user.Email && u.IsActive == true);
             return filteredList.FirstOrDefault();
         }
     }

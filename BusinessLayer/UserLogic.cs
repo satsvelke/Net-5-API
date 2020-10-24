@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.AppSettings;
 using BusinessLayer.Interface;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Model;
@@ -21,44 +22,61 @@ namespace BusinessLayer
         private readonly IOptions<DefaultMessage> messages;
         private readonly IUserRepository userRepository;
         private readonly IMapper mapper;
-        public UserLogic(IUserRepository iUserRepository, IMapper mapper, IOptions<JwtSettings> jwtSettings, IOptions<DefaultMessage> messages)
+        private readonly IDataProtectionProvider dataProtectionProvider;
+        private readonly IOptions<EncryptionSettings> encryptionSettings;
+        public UserLogic(IUserRepository iUserRepository, IMapper mapper, IOptions<JwtSettings> jwtSettings, IOptions<DefaultMessage> messages,
+        IDataProtectionProvider dataProtectionProvider, IOptions<EncryptionSettings> encryptionSettings)
         {
             this.userRepository = iUserRepository;
             this.mapper = mapper;
             this.jwtSettings = jwtSettings;
             this.messages = messages;
+            this.dataProtectionProvider = dataProtectionProvider;
+            this.encryptionSettings = encryptionSettings;
         }
 
         public async Task<Tuple<UserViewModel, ErrorMessage>> CreateTokenAsync(UserViewModel user)
         {
+
             var existingUser = await this.userRepository.GetUserByEmail(this.mapper.Map<User>(user));
 
             if (existingUser == null)
                 return Tuple.Create<UserViewModel, ErrorMessage>(null, this.messages.Value.LoginError); ;
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtSettings.Value.SecretKey));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
+            var decyrptedPassword = this.dataProtectionProvider.CreateProtector(this.encryptionSettings.Value.Key).Unprotect(existingUser.Password);
 
-            var claims = new List<Claim>();
-            claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            claims.Add(new Claim("Valid", "1"));
-            claims.Add(new Claim("UserId", existingUser.UserId.ToString()));
-
-            //Create Security Token object by giving required parameters    
-            var token = new JwtSecurityToken(this.jwtSettings.Value.Issuer, //Issure    
-                            this.jwtSettings.Value.Audience,  //Audience    
-                            claims,
-                            expires: DateTime.Now.AddDays(1),
-                            signingCredentials: credentials);
-
-            var createdToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return Tuple.Create<UserViewModel, ErrorMessage>(new UserViewModel()
+            if (existingUser.Email == user.Email && decyrptedPassword == user.Password)
             {
-                Token = createdToken
-            }, null);
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtSettings.Value.SecretKey));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
+
+                var claims = new List<Claim>();
+                claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+                claims.Add(new Claim("Valid", "1"));
+                claims.Add(new Claim("UserId", existingUser.UserId.ToString()));
+
+                //Create Security Token object by giving required parameters    
+                var token = new JwtSecurityToken(this.jwtSettings.Value.Issuer, //Issure    
+                                this.jwtSettings.Value.Audience,  //Audience    
+                                claims,
+                                expires: DateTime.Now.AddDays(1),
+                                signingCredentials: credentials);
+
+                var createdToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+                return Tuple.Create<UserViewModel, ErrorMessage>(new UserViewModel()
+                {
+                    Token = createdToken
+                }, null);
+            }
+
+            return Tuple.Create<UserViewModel, ErrorMessage>(null, this.messages.Value.LoginError); ;
         }
 
-        public async Task<UserViewModel> CreateUserAsync(UserViewModel user) => this.mapper.Map<UserViewModel>(await this.userRepository.AddAsync(this.mapper.Map<User>(user)));
+        public async Task<UserViewModel> CreateUserAsync(UserViewModel user)
+        {
+            user.Password = this.dataProtectionProvider.CreateProtector(this.encryptionSettings.Value.Key).Protect(user.Password);
+            return this.mapper.Map<UserViewModel>(await this.userRepository.AddAsync(this.mapper.Map<User>(user)));
+        }
     }
 }

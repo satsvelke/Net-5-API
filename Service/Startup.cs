@@ -67,6 +67,9 @@ namespace Service
             // read default ErrorMessages
             services.Configure<DefaultMessage>(Configuration.GetSection("DefaultMessage"));
 
+            // encryption settings 
+            services.Configure<EncryptionSettings>(Configuration.GetSection("EncryptionSettings"));
+
             // get all dependency from persistance layer
             services.GetPersistenceDependency();
 
@@ -80,6 +83,7 @@ namespace Service
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
+            services.AddDataProtection();
 
             //    services.AddExceptional(Configuration.GetSection("Exceptional"));
 

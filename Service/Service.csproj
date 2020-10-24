@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-     <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +16,7 @@
       <ProjectReference Include="../Persistence/Persistence.csproj" />
       <ProjectReference Include="../BusinessLayer/BusinessLayer.csproj" />
       <ProjectReference Include="../ViewModel/ViewModel.csproj" />
-
+      <ProjectReference Include="../Shared/Shared.csproj" />
   </ItemGroup>
 
 

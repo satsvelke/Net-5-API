@@ -20,7 +20,7 @@ namespace Service.Controllers
         public async Task<IActionResult> GetToken(UserViewModel user)
         {
             var response = await _userLogic.CreateTokenAsync(user);
-            return response.Item1 == null ? BadRequest(response.Item2) : Ok(response.Item1);
+            if (response.Item1 == null) return BadRequest(response.Item2); else return Ok(response.Item1);
         }
     }
 }
