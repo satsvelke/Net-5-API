@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class AddExceptions : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,11 +30,29 @@ namespace Persistence.Migrations
                     ErrorHash = table.Column<string>(nullable: true),
                     DuplicateCount = table.Column<int>(nullable: false),
                     LastLogDate = table.Column<DateTime>(nullable: false),
-                    Category = table.Column<string>(nullable: true)
+                    Category = table.Column<string>(nullable: true),
+                    StackTrace = table.Column<string>(nullable: true),
+                    TraceId = table.Column<string>(nullable: true),
+                    Response = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exceptions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
         }
 
@@ -42,6 +60,9 @@ namespace Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Exceptions");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

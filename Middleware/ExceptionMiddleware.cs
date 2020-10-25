@@ -11,14 +11,14 @@ using Newtonsoft.Json;
 using Persistence.DatabaseContext;
 using ViewModel;
 
-namespace Service.Middleware
+namespace Middleware
 {
     // Excepetion Middleware specific dbcontext e.g SpecificContext
     // called directly in Middleware
     // if the database context is diff. change the context class 
     public static partial class ExceptionMiddleware
     {
-        public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder app, IHostEnvironment environment)
+        public static IApplicationBuilder UseExceptions(this IApplicationBuilder app, IHostEnvironment environment)
         {
             if (app == null)
                 throw new ArgumentNullException(nameof(app));

@@ -17,6 +17,8 @@
       <ProjectReference Include="../BusinessLayer/BusinessLayer.csproj" />
       <ProjectReference Include="../ViewModel/ViewModel.csproj" />
       <ProjectReference Include="../Shared/Shared.csproj" />
+      <ProjectReference Include="../Middleware/Middleware.csproj" />
+      
   </ItemGroup>
 
 

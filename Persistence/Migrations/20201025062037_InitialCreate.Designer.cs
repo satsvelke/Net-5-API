@@ -10,8 +10,8 @@ using Persistence.DatabaseContext;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(SpecificContext))]
-    [Migration("20201024175557_AddExceptions")]
-    partial class AddExceptions
+    [Migration("20201025062037_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,10 +72,19 @@ namespace Persistence.Migrations
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Response")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Source")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StackTrace")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StatusCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TraceId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")

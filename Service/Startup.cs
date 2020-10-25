@@ -10,10 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Middleware;
 using Newtonsoft.Json.Serialization;
-using Persistence.DatabaseContext;
 using Persistence.Dependency;
-using Service.Middleware;
 using ViewModel;
 
 namespace Service
@@ -91,11 +90,11 @@ namespace Service
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SpecificContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             // custom excepetionHandler middleware 
-            app.UseExceptionHandler(err => err.UseExceptionHandler(env));
+            app.UseExceptionHandler(err => err.UseExceptions(env));
 
             // app.UseDeveloperExceptionPage();
 
