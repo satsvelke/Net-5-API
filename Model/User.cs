@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Model
 {
+    // User 
     public partial class User : Core
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

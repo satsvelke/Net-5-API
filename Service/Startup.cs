@@ -26,7 +26,7 @@ namespace Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // This is the service to allow cors 
+            // allows cors 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
                {
                    builder.AllowAnyOrigin()
@@ -36,7 +36,7 @@ namespace Service
 
             services.AddControllers();
 
-            // this allows the response to default json format
+            // allows json output 
             services.AddControllers().AddNewtonsoftJson(options =>
                        {
                            options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
@@ -44,6 +44,8 @@ namespace Service
                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+
+            ///jwt configuration 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -61,16 +63,16 @@ namespace Service
                 };
             });
 
-            // read the jwt configurtation from  appsettings.json 
+            // read the jwt configurtation from  appsettings.json - section JwtSettings
             services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
-            // read default ErrorMessages
+            // read default ErrorMessages from appsettings.json -- Section DefaultMessage
             services.Configure<DefaultMessage>(Configuration.GetSection("DefaultMessage"));
 
-            // encryption settings 
+            // encryption settings from appsettings.json - section EncryptionSettings
             services.Configure<EncryptionSettings>(Configuration.GetSection("EncryptionSettings"));
 
-            // get all dependency from persistance layer
+            // get all dependency from persistance layer 
             services.GetPersistenceDependency();
 
             // get dependency from BusinessLayer
@@ -83,10 +85,8 @@ namespace Service
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
-            // encrypt and decrypt
+            // encryption/decryption configuration 
             services.AddDataProtection();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

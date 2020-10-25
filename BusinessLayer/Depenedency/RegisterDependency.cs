@@ -6,6 +6,7 @@ namespace BusinessLayer.Depenedency
 {
     public static partial class RegisterDependency
     {
+        // mapped all dependencies from BusinessLayer 
         public static void GetBusinessDependency(this IServiceCollection service)
         {
             // Auto Mapper Configurations

@@ -9,6 +9,10 @@ namespace Service.Controllers
     [ApiController]
     [Authorize]
     //[TypeFilter(typeof(ExceptionFilter))] // deprecated
+
+    /// <summary>
+    /// base api controller for all controllers
+    /// </summary>
     public partial class CoreController : ControllerBase
     {
 

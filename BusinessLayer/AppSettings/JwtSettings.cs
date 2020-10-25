@@ -1,5 +1,7 @@
 namespace BusinessLayer.AppSettings
 {
+    //  jwt token authentication read from appsettings.json from section JwtSettings
+    //  configured in startup in service 
     public partial class JwtSettings
     {
         public string SecretKey { get; set; }

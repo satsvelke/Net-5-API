@@ -24,6 +24,8 @@ namespace BusinessLayer
         private readonly IMapper mapper;
         private readonly IDataProtectionProvider dataProtectionProvider;
         private readonly IOptions<EncryptionSettings> encryptionSettings;
+
+
         public UserLogic(IUserRepository iUserRepository, IMapper mapper, IOptions<JwtSettings> jwtSettings, IOptions<DefaultMessage> messages,
         IDataProtectionProvider dataProtectionProvider, IOptions<EncryptionSettings> encryptionSettings)
         {
@@ -35,6 +37,11 @@ namespace BusinessLayer
             this.encryptionSettings = encryptionSettings;
         }
 
+        /// <summary>
+        /// Creates a token for valid user
+        /// </summary>
+        /// <param name="user">Email and Password</param>
+        /// <returns></returns>
         public async Task<Tuple<UserViewModel, ErrorMessage>> CreateTokenAsync(UserViewModel user)
         {
 
@@ -73,6 +80,11 @@ namespace BusinessLayer
             return Tuple.Create<UserViewModel, ErrorMessage>(null, this.messages.Value.LoginError); ;
         }
 
+        /// <summary>
+        /// Create a new User 
+        /// </summary>
+        /// <param name="user">User Details </param>
+        /// <returns></returns>
         public async Task<UserViewModel> CreateUserAsync(UserViewModel user)
         {
             user.Password = this.dataProtectionProvider.CreateProtector(this.encryptionSettings.Value.Key).Protect(user.Password);

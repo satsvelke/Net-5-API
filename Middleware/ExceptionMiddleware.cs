@@ -33,6 +33,13 @@ namespace Middleware
         {
             this.next = next;
         }
+
+        /// <summary>
+        /// Invoked whern global application exception happens 
+        /// </summary>
+        /// <param name="httpContext">current request context</param>
+        /// <param name="specificontext">database context in which the exceptions will be logged </param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext httpContext, SpecificContext specificontext)
         {
             // Try and retrieve the error from the ExceptionHandler middleware
@@ -79,6 +86,13 @@ namespace Middleware
             }
 
         }
+
+        /// <summary>
+        /// Logs data to database(Exception  table )
+        /// </summary>
+        /// <param name="context">Database context</param>
+        /// <param name="httpContext">Current request context</param>
+        /// <param name="errorMessage">Custom Erromessages </param>
         private void LogErrorToDatabase(SpecificContext context, HttpContext httpContext, ErrorMessage errorMessage)
         {
             using (context)

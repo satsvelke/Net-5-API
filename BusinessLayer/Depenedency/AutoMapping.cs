@@ -4,6 +4,7 @@ using ViewModel;
 
 namespace BusinessLayer.Depenedency
 {
+    // Automapper profile settings 
     public partial class AutoMapping : Profile
     {
         public AutoMapping()
