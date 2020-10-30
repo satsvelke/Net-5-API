@@ -28,14 +28,10 @@ namespace BusinessLayer
 
         public UserLogic(IUserRepository iUserRepository, IMapper mapper, IOptions<JwtSettings> jwtSettings, IOptions<DefaultMessage> messages,
         IDataProtectionProvider dataProtectionProvider, IOptions<EncryptionSettings> encryptionSettings)
-        {
-            this.userRepository = iUserRepository;
-            this.mapper = mapper;
-            this.jwtSettings = jwtSettings;
-            this.messages = messages;
-            this.dataProtectionProvider = dataProtectionProvider;
-            this.encryptionSettings = encryptionSettings;
-        }
+        => (this.userRepository, this.mapper, this.jwtSettings, this.messages, this.dataProtectionProvider, this.encryptionSettings)
+        = (iUserRepository, mapper, jwtSettings, messages, dataProtectionProvider, encryptionSettings);
+
+
 
         /// <summary>
         /// Creates a token for valid user
@@ -44,7 +40,6 @@ namespace BusinessLayer
         /// <returns></returns>
         public async Task<Tuple<UserViewModel, ErrorMessage>> CreateTokenAsync(UserViewModel user)
         {
-
             var existingUser = await this.userRepository.GetUserByEmail(this.mapper.Map<User>(user));
 
             if (existingUser == null)

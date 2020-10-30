@@ -13,7 +13,6 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     ApplicationName = table.Column<string>(nullable: true),
-                    MachineName = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
                     Type = table.Column<string>(nullable: true),
                     IsProtected = table.Column<bool>(nullable: false),
@@ -21,19 +20,15 @@ namespace Persistence.Migrations
                     Url = table.Column<string>(nullable: true),
                     HTTPMethod = table.Column<string>(nullable: true),
                     IPAddress = table.Column<string>(nullable: true),
-                    Source = table.Column<string>(nullable: true),
                     Message = table.Column<string>(nullable: true),
-                    Detail = table.Column<string>(nullable: true),
                     StatusCode = table.Column<string>(nullable: true),
                     DeletionDate = table.Column<DateTime>(nullable: false),
-                    FullJson = table.Column<string>(nullable: true),
-                    ErrorHash = table.Column<string>(nullable: true),
-                    DuplicateCount = table.Column<int>(nullable: false),
                     LastLogDate = table.Column<DateTime>(nullable: false),
                     Category = table.Column<string>(nullable: true),
                     StackTrace = table.Column<string>(nullable: true),
                     TraceId = table.Column<string>(nullable: true),
-                    Response = table.Column<string>(nullable: true)
+                    Response = table.Column<string>(nullable: true),
+                    RequestBody = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

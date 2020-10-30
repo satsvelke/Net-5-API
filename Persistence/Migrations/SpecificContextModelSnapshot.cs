@@ -37,18 +37,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("DeletionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Detail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DuplicateCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ErrorHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullJson")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("HTTPMethod")
                         .HasColumnType("nvarchar(max)");
 
@@ -64,16 +52,13 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("LastLogDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("MachineName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Response")
+                    b.Property<string>("RequestBody")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Source")
+                    b.Property<string>("Response")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StackTrace")

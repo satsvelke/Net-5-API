@@ -5,7 +5,9 @@ using BusinessLayer.Depenedency;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -26,6 +28,9 @@ namespace Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /// enable kestral services
+            services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);
+
             // allows cors 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
                {
@@ -87,11 +92,19 @@ namespace Service
 
             // encryption/decryption configuration 
             services.AddDataProtection();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.Use((context, next) =>
+            {
+                context.Request.EnableBuffering(); // enable the Buffering to store the request data to disk
+                return next();
+            });
 
             // custom excepetionHandler middleware 
             app.UseExceptionHandler(err => err.UseExceptions(env));

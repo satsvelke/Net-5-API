@@ -8,7 +8,6 @@ namespace Service.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
-    //[TypeFilter(typeof(ExceptionFilter))] // deprecated
 
     /// <summary>
     /// base api controller for all controllers
