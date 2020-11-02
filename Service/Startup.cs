@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Middleware;
 using Newtonsoft.Json.Serialization;
 using Persistence.Dependency;
+using System;
 using System.Linq;
 using System.Text;
 using ViewModel;
@@ -25,7 +26,9 @@ namespace Service
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+#pragma warning disable CA1506 // Avoid excessive class coupling
         public void ConfigureServices(IServiceCollection services)
+#pragma warning restore CA1506 // Avoid excessive class coupling
         {
             /// enable kestral services
             services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);

@@ -19,7 +19,7 @@ namespace Service.Controllers
         [HttpGet]
         public async Task<IActionResult> GetToken(UserViewModel user)
         {
-            var response = await _userLogic.CreateTokenAsync(user);
+            var response = await _userLogic.CreateTokenAsync(user).ConfigureAwait(true);
             if (response.Item1 == null) return BadRequest(response.Item2); else return Ok(response.Item1);
         }
     }

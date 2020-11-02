@@ -39,7 +39,7 @@ namespace Middleware
         /// <param name="httpContext">current request context</param>
         /// <param name="specificontext">database context in which the exceptions will be logged </param>
         /// <returns></returns>
-        public static async Task Invoke(HttpContext httpContext, SpecificContext specificontext)
+        public async Task Invoke(HttpContext httpContext, SpecificContext specificontext)
         {
 
             ///get the body of request 
