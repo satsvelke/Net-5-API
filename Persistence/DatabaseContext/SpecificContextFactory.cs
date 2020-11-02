@@ -12,7 +12,7 @@ namespace Persistence.DatabaseContext
         public SpecificContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<SpecificContext>();
-            builder.UseSqlServer(new ConnectionStrings().GetSpecificContextConnection());
+            builder.UseSqlServer(ConnectionStrings.GetSpecificContextConnection());
             return new SpecificContext(builder.Options);
         }
     }

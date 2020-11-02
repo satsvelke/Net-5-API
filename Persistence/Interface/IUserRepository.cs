@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using Model;
+using System.Threading.Tasks;
 
 namespace Persistence.Interface
 {

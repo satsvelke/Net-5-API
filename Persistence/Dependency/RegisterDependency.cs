@@ -12,7 +12,7 @@ namespace Persistence.Dependency
         public static void GetPersistenceDependency(this IServiceCollection service)
         {
             // register DbContext
-            service.AddDbContext<SpecificContext>(o => o.UseSqlServer(new ConnectionStrings().GetSpecificContextConnection()));
+            service.AddDbContext<SpecificContext>(o => o.UseSqlServer(ConnectionStrings.GetSpecificContextConnection()));
 
             // register work to Iwork   
             service.AddScoped<IWork, Work>();

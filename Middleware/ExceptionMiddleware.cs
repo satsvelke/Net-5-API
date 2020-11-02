@@ -1,15 +1,14 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using Persistence.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using Persistence.DatabaseContext;
 using ViewModel;
 
 namespace Middleware
@@ -19,7 +18,7 @@ namespace Middleware
     // if the database context is diff. change the context class 
     public static partial class ExceptionMiddleware
     {
-        public static IApplicationBuilder UseExceptions(this IApplicationBuilder app, IHostEnvironment environment)
+        public static IApplicationBuilder UseExceptions(this IApplicationBuilder app)
         {
             if (app == null)
                 throw new ArgumentNullException(nameof(app));
@@ -29,11 +28,10 @@ namespace Middleware
 
     public partial class UseExceptionHandling
     {
+#pragma warning disable IDE0052 // Remove unread private members
         private readonly RequestDelegate next;
-        public UseExceptionHandling(RequestDelegate next)
-        {
-            this.next = next;
-        }
+#pragma warning restore IDE0052 // Remove unread private members
+        public UseExceptionHandling(RequestDelegate next) => this.next = next;
 
         /// <summary>
         /// Invoked whern global application exception happens 
@@ -41,7 +39,7 @@ namespace Middleware
         /// <param name="httpContext">current request context</param>
         /// <param name="specificontext">database context in which the exceptions will be logged </param>
         /// <returns></returns>
-        public async Task Invoke(HttpContext httpContext, SpecificContext specificontext)
+        public static async Task Invoke(HttpContext httpContext, SpecificContext specificontext)
         {
 
             ///get the body of request 
@@ -64,8 +62,10 @@ namespace Middleware
                 // ProblemDetails has it's own content type
                 httpContext.Response.ContentType = "application/problem+json";
 
-                var errorList = new List<string>();
-                errorList.Add("Request failed");
+                var errorList = new List<string>
+                {
+                    "Request failed"
+                };
 
                 var errors = new Errors()
                 {
@@ -107,7 +107,7 @@ namespace Middleware
         /// <param name="context">Database context</param>
         /// <param name="httpContext">Current request context</param>
         /// <param name="errorMessage">Custom Erromessages </param>
-        private void LogErrorToDatabase(SpecificContext context, HttpContext httpContext, ErrorMessage errorMessage, string requestBody)
+        private static void LogErrorToDatabase(SpecificContext context, HttpContext httpContext, ErrorMessage errorMessage, string requestBody)
         {
             using (context)
             {

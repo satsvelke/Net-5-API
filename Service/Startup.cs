@@ -1,10 +1,7 @@
-using System.Linq;
-using System.Text;
 using BusinessLayer.AppSettings;
 using BusinessLayer.Depenedency;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -15,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using Middleware;
 using Newtonsoft.Json.Serialization;
 using Persistence.Dependency;
+using System.Linq;
+using System.Text;
 using ViewModel;
 
 namespace Service
@@ -97,7 +96,7 @@ namespace Service
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public static void Configure(IApplicationBuilder app)
         {
 
             app.Use((context, next) =>
@@ -107,7 +106,7 @@ namespace Service
             });
 
             // custom excepetionHandler middleware 
-            app.UseExceptionHandler(err => err.UseExceptions(env));
+            app.UseExceptionHandler(err => err.UseExceptions());
 
             // app.UseDeveloperExceptionPage();
 

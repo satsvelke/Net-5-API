@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.AppSettings;
 using BusinessLayer.Interface;
@@ -12,6 +6,12 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Model;
 using Persistence.Interface;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 using ViewModel;
 
 namespace BusinessLayer
@@ -28,7 +28,7 @@ namespace BusinessLayer
 
         public UserLogic(IUserRepository iUserRepository, IMapper mapper, IOptions<JwtSettings> jwtSettings, IOptions<DefaultMessage> messages,
         IDataProtectionProvider dataProtectionProvider, IOptions<EncryptionSettings> encryptionSettings)
-        => (this.userRepository, this.mapper, this.jwtSettings, this.messages, this.dataProtectionProvider, this.encryptionSettings)
+        => (userRepository, this.mapper, this.jwtSettings, this.messages, this.dataProtectionProvider, this.encryptionSettings)
         = (iUserRepository, mapper, jwtSettings, messages, dataProtectionProvider, encryptionSettings);
 
 
@@ -40,26 +40,28 @@ namespace BusinessLayer
         /// <returns></returns>
         public async Task<Tuple<UserViewModel, ErrorMessage>> CreateTokenAsync(UserViewModel user)
         {
-            var existingUser = await this.userRepository.GetUserByEmail(this.mapper.Map<User>(user));
+            var existingUser = await userRepository.GetUserByEmail(mapper.Map<User>(user));
 
             if (existingUser == null)
-                return Tuple.Create<UserViewModel, ErrorMessage>(null, this.messages.Value.LoginError); ;
+                return Tuple.Create<UserViewModel, ErrorMessage>(null, messages.Value.LoginError); ;
 
-            var decyrptedPassword = this.dataProtectionProvider.CreateProtector(this.encryptionSettings.Value.Key).Unprotect(existingUser.Password);
+            var decyrptedPassword = dataProtectionProvider.CreateProtector(encryptionSettings.Value.Key).Unprotect(existingUser.Password);
 
             if (existingUser.Email == user.Email && decyrptedPassword == user.Password)
             {
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtSettings.Value.SecretKey));
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.SecretKey));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
 
-                var claims = new List<Claim>();
-                claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-                claims.Add(new Claim("Valid", "1"));
-                claims.Add(new Claim("UserId", existingUser.UserId.ToString()));
+                var claims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim("Valid", "1"),
+                    new Claim("UserId", existingUser.UserId.ToString())
+                };
 
                 //Create Security Token object by giving required parameters    
-                var token = new JwtSecurityToken(this.jwtSettings.Value.Issuer, //Issure    
-                                this.jwtSettings.Value.Audience,  //Audience    
+                var token = new JwtSecurityToken(jwtSettings.Value.Issuer, //Issure    
+                                jwtSettings.Value.Audience,  //Audience    
                                 claims,
                                 expires: DateTime.Now.AddDays(1),
                                 signingCredentials: credentials);
@@ -72,7 +74,7 @@ namespace BusinessLayer
                 }, null);
             }
 
-            return Tuple.Create<UserViewModel, ErrorMessage>(null, this.messages.Value.LoginError); ;
+            return Tuple.Create<UserViewModel, ErrorMessage>(null, messages.Value.LoginError); ;
         }
 
         /// <summary>
@@ -82,8 +84,8 @@ namespace BusinessLayer
         /// <returns></returns>
         public async Task<UserViewModel> CreateUserAsync(UserViewModel user)
         {
-            user.Password = this.dataProtectionProvider.CreateProtector(this.encryptionSettings.Value.Key).Protect(user.Password);
-            return this.mapper.Map<UserViewModel>(await this.userRepository.AddAsync(this.mapper.Map<User>(user)));
+            user.Password = dataProtectionProvider.CreateProtector(encryptionSettings.Value.Key).Protect(user.Password);
+            return mapper.Map<UserViewModel>(await userRepository.AddAsync(mapper.Map<User>(user)));
         }
     }
 }

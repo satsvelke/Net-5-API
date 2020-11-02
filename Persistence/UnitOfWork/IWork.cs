@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using Model;
 using Persistence.Repository;
+using System.Threading.Tasks;
 
 namespace Persistence.UnitOfWork
 {

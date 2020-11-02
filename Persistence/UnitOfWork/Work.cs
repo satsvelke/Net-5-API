@@ -1,8 +1,8 @@
-using System;
-using System.Threading.Tasks;
 using Model;
 using Persistence.DatabaseContext;
 using Persistence.Repository;
+using System;
+using System.Threading.Tasks;
 
 namespace Persistence.UnitOfWork
 {
@@ -12,14 +12,14 @@ namespace Persistence.UnitOfWork
 
         private GenericRepository<User> userRepository;
 
-        public Work(SpecificContext _context) => this.context = _context;
+        public Work(SpecificContext _context) => context = _context;
         public GenericRepository<User> UserRepository
         {
             get
             {
-                if (this.userRepository == null)
+                if (userRepository == null)
                 {
-                    this.userRepository = new GenericRepository<User>(context);
+                    userRepository = new GenericRepository<User>(context);
                 }
                 return userRepository;
             }
@@ -32,14 +32,14 @@ namespace Persistence.UnitOfWork
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     context.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()

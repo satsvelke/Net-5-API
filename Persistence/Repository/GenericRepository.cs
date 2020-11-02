@@ -1,10 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Persistence.DatabaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Persistence.DatabaseContext;
 
 namespace Persistence.Repository
 {
@@ -16,7 +16,7 @@ namespace Persistence.Repository
         public GenericRepository(SpecificContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            dbSet = context.Set<TEntity>();
         }
 
         public async virtual Task<IList<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
