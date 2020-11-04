@@ -122,12 +122,6 @@ namespace Service
                 c.SwaggerEndpoint("v1/swagger.json", "My API V1");
             });
 
-            // if (env.IsDevelopment())
-            //     app.UseDeveloperExceptionPage();
-
-            // uncommet to use https 
-            //app.UseHttpsRedirection();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
