@@ -12,7 +12,6 @@ using Microsoft.OpenApi.Models;
 using Middleware;
 using Newtonsoft.Json.Serialization;
 using Persistence.Dependency;
-using System;
 using System.Linq;
 using System.Text;
 using ViewModel;
@@ -122,12 +121,6 @@ namespace Service
             {
                 c.SwaggerEndpoint("v1/swagger.json", "My API V1");
             });
-
-            // if (env.IsDevelopment())
-            //     app.UseDeveloperExceptionPage();
-
-            // uncommet to use https 
-            //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseAuthentication();
