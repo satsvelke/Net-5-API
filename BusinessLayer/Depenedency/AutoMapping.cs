@@ -9,8 +9,7 @@ namespace BusinessLayer.Depenedency
     {
         public AutoMapping()
         {
-            CreateMap<UserViewModel, User>();
-            CreateMap<User, UserViewModel>().ForMember(x => x.Password, o => o.Ignore());
+            CreateMap<User, UserViewModel>().ForMember(x => x.Password, o => o.Ignore()).ReverseMap();
         }
     }
 }
