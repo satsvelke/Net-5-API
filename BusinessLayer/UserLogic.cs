@@ -70,6 +70,7 @@ namespace BusinessLayer
 
                 return Tuple.Create<UserViewModel, ErrorMessage>(new UserViewModel()
                 {
+                    Email = existingUser.Email,
                     Token = createdToken
                 }, null);
             }
