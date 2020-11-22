@@ -1,1 +1,1 @@
-a kick start architect/project for .Net 5 
+a kick start web api architect/project for .Net 5 
