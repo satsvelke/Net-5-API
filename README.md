@@ -1,7 +1,3 @@
-# base_coreapi_arch
+a kick start web api architect/project for .Net 5 
 
-
-
-A basic architect to start a project from scratch 
-
-made in .net core with Ef 
+repository pattern, dependency injection, unit of work, ef, jwt authentication, c# 9.0, exception middleware 
