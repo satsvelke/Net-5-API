@@ -48,6 +48,7 @@ namespace Service
                            options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
                            options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                            options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
