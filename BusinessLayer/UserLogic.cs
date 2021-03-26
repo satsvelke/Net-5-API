@@ -38,12 +38,12 @@ namespace BusinessLayer
         /// </summary>
         /// <param name="user">Email and Password</param>
         /// <returns></returns>
-        public async Task<Tuple<UserViewModel, ErrorMessage>> CreateTokenAsync(UserViewModel user)
+        public async Task<Tuple<UserViewModel, GenericMessage>> CreateTokenAsync(UserViewModel user)
         {
             var existingUser = await userRepository.GetUserByEmail(mapper.Map<User>(user));
 
             if (existingUser == null)
-                return Tuple.Create<UserViewModel, ErrorMessage>(null, messages.Value.LoginError); ;
+                return Tuple.Create<UserViewModel, GenericMessage>(null, messages.Value.LoginError); ;
 
             var decyrptedPassword = dataProtectionProvider.CreateProtector(encryptionSettings.Value.Key).Unprotect(existingUser.Password);
 
@@ -68,14 +68,14 @@ namespace BusinessLayer
 
                 var createdToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-                return Tuple.Create<UserViewModel, ErrorMessage>(new UserViewModel()
+                return Tuple.Create<UserViewModel, GenericMessage>(new UserViewModel()
                 {
                     Email = existingUser.Email,
                     Token = createdToken
                 }, null);
             }
 
-            return Tuple.Create<UserViewModel, ErrorMessage>(null, messages.Value.LoginError); ;
+            return Tuple.Create<UserViewModel, GenericMessage>(null, messages.Value.LoginError); ;
         }
 
         /// <summary>

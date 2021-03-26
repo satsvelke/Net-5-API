@@ -7,6 +7,6 @@ namespace BusinessLayer.Interface
     public interface IUserLogic
     {
         Task<UserViewModel> CreateUserAsync(UserViewModel user);
-        Task<Tuple<UserViewModel, ErrorMessage>> CreateTokenAsync(UserViewModel user);
+        Task<Tuple<UserViewModel, GenericMessage>> CreateTokenAsync(UserViewModel user);
     }
 }

@@ -72,7 +72,7 @@ namespace Middleware
                     ErrorList = errorList
                 };
 
-                var errorsMessage = new ErrorMessage()
+                var errorsMessage = new GenericMessage()
                 {
                     type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
                     title = "Internal Server Error",
@@ -107,7 +107,7 @@ namespace Middleware
         /// <param name="context">Database context</param>
         /// <param name="httpContext">Current request context</param>
         /// <param name="errorMessage">Custom Erromessages </param>
-        private static void LogErrorToDatabase(SpecificContext context, HttpContext httpContext, ErrorMessage errorMessage, string requestBody)
+        private static void LogErrorToDatabase(SpecificContext context, HttpContext httpContext, GenericMessage errorMessage, string requestBody)
         {
             using (context)
             {

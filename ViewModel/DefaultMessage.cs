@@ -7,7 +7,7 @@ namespace ViewModel
         public List<string> ErrorList { get; set; }
     }
 
-    public partial class ErrorMessage
+    public partial class GenericMessage
     {
         public Errors errors { get; set; }
 #pragma warning disable IDE1006 // Naming Styles
@@ -26,8 +26,8 @@ namespace ViewModel
 
     public partial class DefaultMessage
     {
-        public ErrorMessage LoginError { get; set; }
-        public ErrorMessage DataNotAvailable { get; set; }
+        public GenericMessage LoginError { get; set; }
+        public GenericMessage DataNotAvailable { get; set; }
     }
 
 }
