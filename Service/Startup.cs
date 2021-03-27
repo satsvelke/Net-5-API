@@ -48,7 +48,7 @@ namespace Service
                            options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
                            options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                            options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                           options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                        }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
@@ -94,14 +94,11 @@ namespace Service
 
             // encryption/decryption configuration 
             services.AddDataProtection();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public static void Configure(IApplicationBuilder app)
         {
-
             app.Use((context, next) =>
             {
                 context.Request.EnableBuffering(); // enable the Buffering to store the request data to disk
