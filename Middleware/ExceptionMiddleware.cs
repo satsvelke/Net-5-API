@@ -47,9 +47,8 @@ namespace Middleware
             httpContext.Request.Body.Position = 0;
             using (var reader = new StreamReader(httpContext.Request.Body, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: false,
                      bufferSize: 8192, leaveOpen: true))
-            {
                 requestBody = await reader.ReadToEndAsync();
-            }
+
             httpContext.Request.Body.Position = 0;
 
             // Try and retrieve the error from the ExceptionHandler middleware
