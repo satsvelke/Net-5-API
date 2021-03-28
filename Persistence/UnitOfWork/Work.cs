@@ -18,9 +18,8 @@ namespace Persistence.UnitOfWork
             get
             {
                 if (userRepository == null)
-                {
                     userRepository = new GenericRepository<User>(context);
-                }
+
                 return userRepository;
             }
         }
@@ -33,12 +32,9 @@ namespace Persistence.UnitOfWork
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
-            {
                 if (disposing)
-                {
                     context.Dispose();
-                }
-            }
+
             disposed = true;
         }
 

@@ -22,15 +22,14 @@ namespace Middleware
         {
             if (app == null)
                 throw new ArgumentNullException(nameof(app));
+
             return app.UseMiddleware<UseExceptionHandling>();
         }
     }
 
     public partial class UseExceptionHandling
     {
-#pragma warning disable IDE0052 // Remove unread private members
         private readonly RequestDelegate next;
-#pragma warning restore IDE0052 // Remove unread private members
         public UseExceptionHandling(RequestDelegate next) => this.next = next;
 
         /// <summary>
@@ -45,6 +44,7 @@ namespace Middleware
             ///get the body of request 
             string requestBody = null;
             httpContext.Request.Body.Position = 0;
+
             using (var reader = new StreamReader(httpContext.Request.Body, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: false,
                      bufferSize: 8192, leaveOpen: true))
                 requestBody = await reader.ReadToEndAsync();
@@ -53,50 +53,50 @@ namespace Middleware
 
             // Try and retrieve the error from the ExceptionHandler middleware
             var exceptionDetails = httpContext.Features.Get<IExceptionHandlerFeature>();
+
             var ex = exceptionDetails?.Error;
             // Should always exist, but best to be safe!
-            if (ex != null)
-            {
+            if (ex == null)
+                return;
 
-                // ProblemDetails has it's own content type
-                httpContext.Response.ContentType = "application/problem+json";
+            // ProblemDetails has it's own content type
+            httpContext.Response.ContentType = "application/problem+json";
 
-                var errorList = new List<string>
+            var errorList = new List<string>
                 {
                     "Request failed"
                 };
 
-                var errors = new Errors()
-                {
-                    ErrorList = errorList
-                };
+            var errors = new Errors()
+            {
+                ErrorList = errorList
+            };
 
-                var errorsMessage = new GenericMessage()
-                {
-                    type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
-                    title = "Internal Server Error",
-                    status = 500,
-                    errors = errors
-                };
+            var errorsMessage = new GenericMessage()
+            {
+                type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+                title = "Internal Server Error",
+                status = 500,
+                errors = errors
+            };
 
-                // This is often very handy information for tracing the specific request
-                var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
-                if (traceId != null)
-                    errorsMessage.traceId = traceId;
+            // This is often very handy information for tracing the specific request
+            var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
+            if (traceId != null)
+                errorsMessage.traceId = traceId;
 
-                await Task.Factory.StartNew(() =>
-                {
-                    LogErrorToDatabase(specificontext, httpContext, errorsMessage, requestBody);
-                });
+            await Task.Factory.StartNew(() =>
+            {
+                LogErrorToDatabase(specificontext, httpContext, errorsMessage, requestBody);
+            });
 
-                //Serialize the problem details object to the Response as JSON (using System.Text.Json)
-                string jsonString = JsonConvert.SerializeObject(errorsMessage);
+            //Serialize the problem details object to the Response as JSON (using System.Text.Json)
+            string jsonString = JsonConvert.SerializeObject(errorsMessage);
 
-                await httpContext.Response.WriteAsync(jsonString, Encoding.UTF8);
+            await httpContext.Response.WriteAsync(jsonString, Encoding.UTF8);
 
-                // to stop futher pipeline execution 
-                return;
-            }
+            // to stop futher pipeline execution 
+            return;
 
         }
 
