@@ -68,17 +68,12 @@ namespace Middleware
                     "Request failed"
                 };
 
-            var errors = new Errors()
-            {
-                ErrorList = errorList
-            };
 
             var errorsMessage = new GenericMessage()
             {
                 type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
                 title = "Internal Server Error",
                 status = 500,
-                errors = errors
             };
 
             // This is often very handy information for tracing the specific request

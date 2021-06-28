@@ -13,6 +13,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.ViewModel;
+using Microsoft.AspNetCore.Mvc;
+using Workflow.Authentication;
 
 namespace Workflow
 {
@@ -38,44 +40,46 @@ namespace Workflow
         /// </summary>
         /// <param name="user">Email and Password</param>
         /// <returns></returns>
-        public async Task<Tuple<UserViewModel, GenericMessage>> CreateTokenAsync(UserViewModel user)
+        public async Task<IActionResult> CreateTokenAsync(UserViewModel user)
         {
+            var genericMessages = new List<GenericMessage>();
+
             var existingUser = await userRepository.GetUserByEmail(mapper.Map<User>(user));
 
+            // if not exist 
             if (existingUser == null)
-                return Tuple.Create<UserViewModel, GenericMessage>(null, messages.Value.LoginError); ;
+            {
+                genericMessages.Add(messages.Value.LoginError);
+                return new BadRequestObjectResult(new Response()
+                {
+                    Statuses = genericMessages
+                });
+            }
 
             var decyrptedPassword = dataProtectionProvider.CreateProtector(encryptionSettings.Value.Key).Unprotect(existingUser.Password);
 
-            if (existingUser.Email == user.Email && decyrptedPassword == user.Password)
+            // if username password is wrong
+            if (existingUser.Email != user.Email && decyrptedPassword != user.Password)
             {
-                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.SecretKey));
-                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
+                genericMessages.Add(messages.Value.LoginError);
 
-                var claims = new List<Claim>
+                return new BadRequestObjectResult(new Response()
                 {
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim("Valid", "1"),
-                    new Claim("UserId", existingUser.UserId.ToString())
-                };
-
-                //Create Security Token object by giving required parameters    
-                var token = new JwtSecurityToken(jwtSettings.Value.Issuer, //Issure    
-                                jwtSettings.Value.Audience,  //Audience    
-                                claims,
-                                expires: DateTime.Now.AddDays(1),
-                                signingCredentials: credentials);
-
-                var createdToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-                return Tuple.Create<UserViewModel, GenericMessage>(new UserViewModel()
-                {
-                    Email = existingUser.Email,
-                    Token = createdToken
-                }, null);
+                    Statuses = genericMessages
+                });
             }
 
-            return Tuple.Create<UserViewModel, GenericMessage>(null, messages.Value.LoginError); ;
+            genericMessages.Add(messages.Value.DefaultSuccess);
+
+            return new OkObjectResult(new Response()
+            {
+                Statuses = genericMessages,
+                Transaction = new UserViewModel()
+                {
+                    Email = existingUser.Email,
+                    Token = new JWTToken(this.jwtSettings).GetToken(existingUser.UserId.ToString())
+                }
+            }); 
         }
 
         /// <summary>

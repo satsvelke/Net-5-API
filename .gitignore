@@ -1,24 +1,22 @@
 .vs/base_coreapi_arch/DesignTimeBuild/.dtbcache.v2
 .vs/base_coreapi_arch/v16/.suo
-BusinessLayer/obj/
-IBusinessLayer/obj/
-IPersistence/obj/
-Model/obj/
-Persistence/obj/
-Service/obj/
+
+API/bin/
+API/obj/
+
+Domain/bin/
+Domain/obj/
+
+Shared/bin/
+Shared/obj/
+
+Structure/Middleware/bin/
+Structure/Middleware/obj/
 
 
+Structure/Persistence/bin/
+Structure/Persistence/obj/
 
-Persistence/bin
-Service/bin
-Model/bin
-BusinessLayer/bin
-ViewModel/bin
-ViewModel/obj
-Shared/obj
-Shared/obj
-Shared/bin
 
-Middleware/obj
-Middleware/obj
-Middleware/bin
+Structure/Workflow/bin/
+Structure/Workflow/obj/
