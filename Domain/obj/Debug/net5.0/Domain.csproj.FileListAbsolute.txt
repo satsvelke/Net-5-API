@@ -33,3 +33,15 @@ D:\Projects\Net-Core-API\DomainModel\Domain\obj\Debug\net5.0\Domain.dll
 D:\Projects\Net-Core-API\DomainModel\Domain\obj\Debug\net5.0\ref\Domain.dll
 D:\Projects\Net-Core-API\DomainModel\Domain\obj\Debug\net5.0\Domain.pdb
 D:\Projects\Net-Core-API\DomainModel\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+D:\Projects\core\Net-Core-API\Domain\bin\Debug\net5.0\Domain.deps.json
+D:\Projects\core\Net-Core-API\Domain\bin\Debug\net5.0\Domain.dll
+D:\Projects\core\Net-Core-API\Domain\bin\Debug\net5.0\ref\Domain.dll
+D:\Projects\core\Net-Core-API\Domain\bin\Debug\net5.0\Domain.pdb
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\Domain.dll
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\ref\Domain.dll
+D:\Projects\core\Net-Core-API\Domain\obj\Debug\net5.0\Domain.pdb

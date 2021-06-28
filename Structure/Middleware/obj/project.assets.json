@@ -6423,8 +6423,8 @@
     },
     "Domain/1.0.0": {
       "type": "project",
-      "path": "../../DomainModel/Domain/Domain.csproj",
-      "msbuildProject": "../../DomainModel/Domain/Domain.csproj"
+      "path": "../../Domain/Domain.csproj",
+      "msbuildProject": "../../Domain/Domain.csproj"
     },
     "Persistence/1.0.0": {
       "type": "project",
@@ -6447,11 +6447,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
+      "projectUniqueName": "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
       "projectName": "Middleware",
-      "projectPath": "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
+      "projectPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
       "packagesPath": "C:\\Users\\satsv\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\obj\\",
+      "outputPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\satsv\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6468,11 +6468,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj"
+            "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj"
             },
-            "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj": {
-              "projectPath": "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj"
+            "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj": {
+              "projectPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj"
             }
           }
         }

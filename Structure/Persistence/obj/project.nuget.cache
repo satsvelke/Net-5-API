@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v25N36ddXPPv7oVJrzRWa/N6Ms0D342wjsIscjB/2KuZRg/efjCuEOQX7jd5cn6DdIbWS3/7vEFYnsESht7Tnw==",
+  "dgSpecHash": "DauloEkmh57BQTSFuki/kfNYxKG8Vo/+0A74p3JtXYgPeSFJ8FkEZfLhhUxATtBpEeQ8aPneqWvGMiGlPnDM4Q==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj",
+  "projectFilePath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\satsv\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\satsv\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

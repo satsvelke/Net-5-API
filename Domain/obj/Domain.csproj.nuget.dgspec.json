@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj": {}
+    "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj": {
+    "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj",
+        "projectPath": "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\satsv\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\obj\\",
+        "outputPath": "D:\\Projects\\core\\Net-Core-API\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\satsv\\AppData\\Roaming\\NuGet\\NuGet.Config",

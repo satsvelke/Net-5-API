@@ -6,7 +6,7 @@
 
    <ItemGroup>
       <ProjectReference Include="../Persistence/Persistence.csproj" />
-      <ProjectReference Include="..\..\DomainModel\Domain\Domain.csproj" />
+      <ProjectReference Include="..\..\Domain\Domain.csproj" />
   </ItemGroup>
 
    <ItemGroup>

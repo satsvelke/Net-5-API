@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Rg1AeSqZBf728aMphgxHMbvIS6PKuRMRNB6ACkjOR0Tf/Yl7wj/hHVEDZfXp8vMZGb6LRcygCwY4hTOg40iKJQ==",
+  "dgSpecHash": "s3b06MDOk9Iy6rKdWKGNehwEq13UkNi/2p7LgJ7gSFPRl1IwUGfy1XUun1DXJC5nFwROREDhp+XPfagytKoLeg==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Net-Core-API\\Structure\\Workflow\\Workflow.csproj",
+  "projectFilePath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Workflow\\Workflow.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\satsv\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\satsv\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.7\\microsoft.aspnetcore.authentication.jwtbearer.5.0.7.nupkg.sha512",

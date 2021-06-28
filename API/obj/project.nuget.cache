@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iQLqt41d5zlie6PemQEWgqxIJHMGHLGcfslfxoZYo9qbhX9g7GTtCBOGMWESJJfyCyNLGFqmeyvdqGAPcfZaAQ==",
+  "dgSpecHash": "ajBOfb6SkuiWAgP9NnCP/BVG+3cYUzuXCRSV2jplr8WiwXySNXgQWyTtPR+f1cI0ZSbVA1o8zZgfvMecRkK8cA==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Net-Core-API\\API\\Service.csproj",
+  "projectFilePath": "D:\\Projects\\core\\Net-Core-API\\API\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\satsv\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\satsv\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

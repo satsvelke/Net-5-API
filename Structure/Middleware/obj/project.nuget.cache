@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Pim8hRKcZw2DaF1DHxIFEgocsN6VN8Z8/f9HWDvSgL2Pd/erFFmmwe/5K+rvVFoDqMnC+tYRBgaWh4qO4nsoGQ==",
+  "dgSpecHash": "qeQ0hRLMzCSk4+gxhvPZ4H7ikF4NZsU9yMZAuoFngenn0RIdjhrY+tcQ1uLMRj4QO2UCewUrx8dyG3OA8tIe1A==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
+  "projectFilePath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\satsv\\.nuget\\packages\\microsoft.aspnetcore.diagnostics\\2.2.0\\microsoft.aspnetcore.diagnostics.2.2.0.nupkg.sha512",
     "C:\\Users\\satsv\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.abstractions\\2.2.0\\microsoft.aspnetcore.diagnostics.abstractions.2.2.0.nupkg.sha512",

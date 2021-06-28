@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj": {}
+    "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj": {
+    "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj",
+        "projectPath": "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\satsv\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\obj\\",
+        "outputPath": "D:\\Projects\\core\\Net-Core-API\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\satsv\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -64,14 +64,14 @@
         }
       }
     },
-    "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj": {
+    "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
+        "projectUniqueName": "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
         "projectName": "Middleware",
-        "projectPath": "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
+        "projectPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\Middleware.csproj",
         "packagesPath": "C:\\Users\\satsv\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Net-Core-API\\Structure\\Middleware\\obj\\",
+        "outputPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Middleware\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\satsv\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,11 +88,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj"
+              "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj"
               },
-              "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj": {
-                "projectPath": "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj"
+              "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj": {
+                "projectPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj"
               }
             }
           }
@@ -139,14 +139,14 @@
         }
       }
     },
-    "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj": {
+    "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj",
+        "projectPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\Persistence.csproj",
         "packagesPath": "C:\\Users\\satsv\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Net-Core-API\\Structure\\Persistence\\obj\\",
+        "outputPath": "D:\\Projects\\core\\Net-Core-API\\Structure\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\satsv\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -163,8 +163,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Projects\\Net-Core-API\\DomainModel\\Domain\\Domain.csproj"
+              "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Projects\\core\\Net-Core-API\\Domain\\Domain.csproj"
               }
             }
           }
