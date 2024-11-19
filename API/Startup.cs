@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Middleware;
 using Newtonsoft.Json.Serialization;
 using Persistence.Dependency;
 using System.Linq;
@@ -106,7 +105,6 @@ namespace Service
             });
 
             // custom excepetionHandler middleware 
-            app.UseExceptionHandler(err => err.UseExceptions());
 
             // app.UseDeveloperExceptionPage();
 
